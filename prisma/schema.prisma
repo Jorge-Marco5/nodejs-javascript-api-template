@@ -1,0 +1,42 @@
+// @prisma/client
+// @prisma/client/runtime
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  name      String
+  password  String     @db.VarChar(255) 
+  role      Role       @default(USER)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  sessions  Session[] 
+  @@map("users")
+}
+
+model Session { 
+  id               String    @id @default(uuid())
+  userId           String
+  ipAddress        String
+  createdAt        DateTime  @default(now())
+  lastActiveAt     DateTime  @default(now()) @updatedAt
+  expiresAt        DateTime  
+  isActive         Boolean   @default(true)
+  refreshToken     String    @db.Text 
+  user             User      @relation(fields: [userId], references: [id])
+  @@map("sessions")
+}
+
+enum Role {
+  USER
+  ADMIN
+}

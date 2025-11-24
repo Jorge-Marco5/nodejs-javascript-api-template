@@ -1,0 +1,27 @@
+{
+  "watch": ["src", "server.js", ".env"],
+  "ext": "js,json,env",
+  "ignore": [
+    "tests/**",
+    "node_modules/**",
+    "logs/**",
+    "coverage/**",
+    "*.test.js"
+  ],
+  "delay": 1000,
+  "verbose": false,
+  "execMap": {
+    "js": "node --experimental-modules"
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "events": {
+    "restart": "echo '🔄 Servidor reiniciado...'",
+    "crash": "echo '💥 Servidor crasheado - esperando cambios...'",
+    "start": "echo '🚀 Servidor iniciado'"
+  },
+  "colours": true,
+  "restartable": "rs",
+  "legacyWatch": false
+}
