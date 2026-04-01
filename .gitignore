@@ -6,4 +6,4 @@ coverage/
 .vscode/
 .idea/
 prisma/migrations 
-
+generated/

@@ -241,13 +241,6 @@ app.get('/health', (req, res) => {
 const apiVersion = process.env.API_VERSION;
 app.use(`/api/${apiVersion}`, routes);
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Ruta no encontrada',
-  });
-});
 
 // Error handler
 app.use(errorMiddleware);
